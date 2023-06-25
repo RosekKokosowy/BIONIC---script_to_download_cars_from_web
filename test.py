@@ -29,7 +29,7 @@ def changeToHp(a):
         return 390
     else:
         return 500
-
+a=0
 
 URL = "https://www.otomoto.pl/osobowe/uzywane/seg-mini"
 r = requests.get(URL)
@@ -41,6 +41,8 @@ smallCars=[]
 
 for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
+    car['id'] = a
+    a = a + 1
     car['yearOfManufacture'] = row.li.text
     car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
@@ -52,6 +54,7 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
     img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
+    car['gearBox'] = 'automatic' 
     smallCars.append(car)
     
         
@@ -65,6 +68,8 @@ SUVs=[]
 
 for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
+    car['id'] = a
+    a = a + 1
     car['yearOfManufacture'] = row.li.text
     car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text                     
@@ -76,6 +81,7 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
     img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
+    car['gearBox'] = 'automatic'
     SUVs.append(car)
 
 URL = "https://www.otomoto.pl/osobowe/uzywane/seg-coupe"
@@ -88,6 +94,8 @@ coupes=[]
 
 for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
+    car['id'] = a
+    a = a + 1
     car['yearOfManufacture'] = row.li.text
     car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
@@ -99,6 +107,7 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
     img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
+    car['gearBox'] = 'automatic'
     coupes.append(car)
 
 
@@ -112,6 +121,8 @@ cabrios=[]
 
 for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
+    car['id'] = a
+    a = a + 1
     car['yearOfManufacture'] = row.li.text
     car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
@@ -123,6 +134,7 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
     img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
+    car['gearBox'] = 'automatic'
     cabrios.append(car)
     
 URL = "https://www.otomoto.pl/osobowe/uzywane/seg-sedan"
@@ -135,6 +147,8 @@ sedans=[]
 
 for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
+    car['id'] = a
+    a = a + 1
     car['yearOfManufacture'] = row.li.text
     car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
@@ -146,8 +160,8 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
     img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
+    car['gearBox'] = 'automatic'
     sedans.append(car)
-print(sedans)
 
 URL = "https://www.otomoto.pl/osobowe/uzywane/seg-combi"
 r = requests.get(URL)
@@ -159,6 +173,8 @@ combis=[]
 
 for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
+    car['id'] = a
+    a = a + 1
     car['yearOfManufacture'] = row.li.text
     car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
@@ -170,6 +186,7 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
     img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
+    car['gearBox'] = 'automatic'
     combis.append(car)
 
 conn = psycopg2.connect(
@@ -184,35 +201,30 @@ conn.autocommit = True
 cursor = conn.cursor()
 
 
-cursor.execute("CREATE TABLE if not exists smallCars (name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), HP VARCHAR(255), typeOfFuel VARCHAR(255))")
-cursor.execute("CREATE TABLE if not exists SUVs (name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), HP VARCHAR(255), typeOfFuel VARCHAR(255))")
-cursor.execute("CREATE TABLE if not exists Coupes (name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), HP VARCHAR(255), typeOfFuel VARCHAR(255))")
-cursor.execute("CREATE TABLE if not exists Sedan (name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), HP VARCHAR(255), typeOfFuel VARCHAR(255))")
-cursor.execute("CREATE TABLE if not exists Combi (name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), HP VARCHAR(255), typeOfFuel VARCHAR(255))")
-cursor.execute("CREATE TABLE if not exists Cabrio (name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), HP VARCHAR(255), typeOfFuel VARCHAR(255))")
+cursor.execute("CREATE TABLE if not exists smallCars (id VARCHAR(255), name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), horsePower VARCHAR(255), typeOfFuel VARCHAR(255), gearBox VARCHAR(255))")
+cursor.execute("CREATE TABLE if not exists SUVs (id VARCHAR(255), name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), horsePower VARCHAR(255), typeOfFuel VARCHAR(255), gearBox VARCHAR(255))")
+cursor.execute("CREATE TABLE if not exists Coupes (id VARCHAR(255), name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), horsePower VARCHAR(255), typeOfFuel VARCHAR(255), gearBox VARCHAR(255))")
+cursor.execute("CREATE TABLE if not exists Sedan (id VARCHAR(255), name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), horsePower VARCHAR(255), typeOfFuel VARCHAR(255), gearBox VARCHAR(255))")
+cursor.execute("CREATE TABLE if not exists Combi (id VARCHAR(255), name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), horsePower VARCHAR(255), typeOfFuel VARCHAR(255), gearBox VARCHAR(255))")
+cursor.execute("CREATE TABLE if not exists Cabrio (id VARCHAR(255), name VARCHAR(255), img VARCHAR(255), yearOfManufacture VARCHAR(255), price VARCHAR(255), mileage VARCHAR(255), horsePower VARCHAR(255), typeOfFuel VARCHAR(255), gearBox VARCHAR(255))")
 
 for i in smallCars:
     if i['yearOfManufacture'].isnumeric():
-        cursor.execute(" INSERT INTO smallCars (name, img, yearOfManufacture, price, mileage, HP, typeOfFuel) VALUES(%s, %s, %s, %s, %s, %s, %s)",(i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel']))
+        cursor.execute(" INSERT INTO smallCars (id, name, img, yearOfManufacture, price, mileage, horsePower, typeOfFuel, gearBox) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)",(i['id'] ,i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel'], i['gearBox']))
 
 for i in SUVs:
     if i['yearOfManufacture'].isnumeric():
-        cursor.execute(" INSERT INTO SUVs (name, img, yearOfManufacture, price, mileage, HP, typeOfFuel) VALUES(%s, %s, %s, %s, %s, %s, %s)",(i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel']))
-
+        cursor.execute(" INSERT INTO SUVs (id, name, img, yearOfManufacture, price, mileage, horsePower, typeOfFuel, gearBox) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)",(i['id'] ,i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel'], i['gearBox']))
 for i in coupes:
     if i['yearOfManufacture'].isnumeric():
-        cursor.execute(" INSERT INTO Coupes (name, img, yearOfManufacture, price, mileage, HP, typeOfFuel) VALUES(%s, %s, %s, %s, %s, %s, %s)",(i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel']))
-
+        cursor.execute(" INSERT INTO Coupes (id, name, img, yearOfManufacture, price, mileage, horsePower, typeOfFuel, gearBox) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)",(i['id'] ,i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel'], i['gearBox']))
 for i in sedans:
     if i['yearOfManufacture'].isnumeric():
-        cursor.execute(" INSERT INTO Sedan (name, img, yearOfManufacture, price, mileage, HP, typeOfFuel) VALUES(%s, %s, %s, %s, %s, %s, %s)",(i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel']))
-
+        cursor.execute(" INSERT INTO Sedan (id, name, img, yearOfManufacture, price, mileage, horsePower, typeOfFuel, gearBox) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)",(i['id'] ,i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel'], i['gearBox']))
 for i in combis:
     if i['yearOfManufacture'].isnumeric():
-        cursor.execute(" INSERT INTO Combi (name, img, yearOfManufacture, price, mileage, HP, typeOfFuel) VALUES(%s, %s, %s, %s, %s, %s, %s)",(i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel']))
-
+        cursor.execute(" INSERT INTO Combi (id, name, img, yearOfManufacture, price, mileage, horsePower, typeOfFuel, gearBox) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)",(i['id'] ,i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel'], i['gearBox']))
 for i in cabrios:
     if i['yearOfManufacture'].isnumeric():
-        cursor.execute(" INSERT INTO Cabrio (name, img, yearOfManufacture, price, mileage, HP, typeOfFuel) VALUES(%s, %s, %s, %s, %s, %s, %s)",(i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel']))
-
+        cursor.execute(" INSERT INTO Cabrio (id, name, img, yearOfManufacture, price, mileage, horsePower, typeOfFuel, gearBox) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)",(i['id'] ,i['name'], i['img'], i['yearOfManufacture'],i['price'],i['mileage'],i['HP to determine'], i['typeOfFuel'], i['gearBox']))
 conn.close
