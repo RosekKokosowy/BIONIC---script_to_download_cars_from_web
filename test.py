@@ -31,7 +31,7 @@ def changeToHp(a):
         return 500
 
 
-URL = "https://www.otomoto.pl/osobowe/uzywane/seg-mini?search%5Badvanced_search_expanded%5D=true"
+URL = "https://www.otomoto.pl/osobowe/uzywane/seg-mini"
 r = requests.get(URL)
 
 soup = BeautifulSoup(r.content, 'html5lib')
@@ -39,10 +39,10 @@ soup = BeautifulSoup(r.content, 'html5lib')
 tableofCars = soup.find('div', attrs = {'class' : 'ooa-1un3d5b er8sc6m2'})
 smallCars=[]
 
-for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565y0'}):
+for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
     car['yearOfManufacture'] = row.li.text
-    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y11'}).text
+    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
     car['mileage'] = mil.strip(" km")
     hp = row.findAll('li')[2].text
@@ -50,11 +50,12 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565
     car['HP to determine'] = changeToHp(x)
     car['typeOfFuel'] = row.findAll('li')[3].text
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
-    img = row.find('img', attrs = {'class' : 'evg565y18 ooa-ep0of3'})
+    img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
     smallCars.append(car)
+    
         
-URL = "https://www.otomoto.pl/osobowe/uzywane/seg-suv?search%5Badvanced_search_expanded%5D=true"
+URL = "https://www.otomoto.pl/osobowe/uzywane/seg-suv"
 r = requests.get(URL)
 
 soup = BeautifulSoup(r.content, 'html5lib')
@@ -62,23 +63,22 @@ soup = BeautifulSoup(r.content, 'html5lib')
 tableofCars = soup.find('div', attrs = {'class' : 'ooa-1un3d5b er8sc6m2'})
 SUVs=[]
 
-for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565y0'}):
+for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
     car['yearOfManufacture'] = row.li.text
-    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y11'}).text
-    mil = row.findAll('li')[1].text
+    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
+    mil = row.findAll('li')[1].text                     
     car['mileage'] = mil.strip(" km")
     hp = row.findAll('li')[2].text
     x = hp.strip(" cm3")
     car['HP to determine'] = changeToHp(x)
     car['typeOfFuel'] = row.findAll('li')[3].text
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
-    img = row.find('img', attrs = {'class' : 'evg565y18 ooa-ep0of3'})
+    img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
     SUVs.append(car)
 
-
-URL = "https://www.otomoto.pl/osobowe/uzywane/seg-coupe?search%5Badvanced_search_expanded%5D=true"
+URL = "https://www.otomoto.pl/osobowe/uzywane/seg-coupe"
 r = requests.get(URL)
 
 soup = BeautifulSoup(r.content, 'html5lib')
@@ -86,10 +86,10 @@ soup = BeautifulSoup(r.content, 'html5lib')
 tableofCars = soup.find('div', attrs = {'class' : 'ooa-1un3d5b er8sc6m2'})
 coupes=[]
 
-for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565y0'}):
+for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
     car['yearOfManufacture'] = row.li.text
-    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y11'}).text
+    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
     car['mileage'] = mil.strip(" km")
     hp = row.findAll('li')[2].text
@@ -97,11 +97,12 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565
     car['HP to determine'] = changeToHp(x)
     car['typeOfFuel'] = row.findAll('li')[3].text
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
-    img = row.find('img', attrs = {'class' : 'evg565y18 ooa-ep0of3'})
+    img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
     coupes.append(car)
 
-URL = "https://www.otomoto.pl/osobowe/uzywane/seg-cabrio?search%5Badvanced_search_expanded%5D=true"
+
+URL = "https://www.otomoto.pl/osobowe/uzywane/seg-cabrio"
 r = requests.get(URL)
 
 soup = BeautifulSoup(r.content, 'html5lib')
@@ -109,10 +110,10 @@ soup = BeautifulSoup(r.content, 'html5lib')
 tableofCars = soup.find('div', attrs = {'class' : 'ooa-1un3d5b er8sc6m2'})
 cabrios=[]
 
-for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565y0'}):
+for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
     car['yearOfManufacture'] = row.li.text
-    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y11'}).text
+    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
     car['mileage'] = mil.strip(" km")
     hp = row.findAll('li')[2].text
@@ -120,11 +121,11 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565
     car['HP to determine'] = changeToHp(x)
     car['typeOfFuel'] = row.findAll('li')[3].text
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
-    img = row.find('img', attrs = {'class' : 'evg565y18 ooa-ep0of3'})
+    img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
     cabrios.append(car)
-
-URL = "https://www.otomoto.pl/osobowe/uzywane/seg-sedan?search%5Badvanced_search_expanded%5D=true"
+    
+URL = "https://www.otomoto.pl/osobowe/uzywane/seg-sedan"
 r = requests.get(URL)
 
 soup = BeautifulSoup(r.content, 'html5lib')
@@ -132,10 +133,10 @@ soup = BeautifulSoup(r.content, 'html5lib')
 tableofCars = soup.find('div', attrs = {'class' : 'ooa-1un3d5b er8sc6m2'})
 sedans=[]
 
-for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565y0'}):
+for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
     car['yearOfManufacture'] = row.li.text
-    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y11'}).text
+    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
     car['mileage'] = mil.strip(" km")
     hp = row.findAll('li')[2].text
@@ -143,12 +144,12 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565
     car['HP to determine'] = changeToHp(x)
     car['typeOfFuel'] = row.findAll('li')[3].text
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
-    img = row.find('img', attrs = {'class' : 'evg565y18 ooa-ep0of3'})
+    img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
     sedans.append(car)
+print(sedans)
 
-
-URL = "https://www.otomoto.pl/osobowe/uzywane/seg-combi?search%5Badvanced_search_expanded%5D=true"
+URL = "https://www.otomoto.pl/osobowe/uzywane/seg-combi"
 r = requests.get(URL)
 
 soup = BeautifulSoup(r.content, 'html5lib')
@@ -156,10 +157,10 @@ soup = BeautifulSoup(r.content, 'html5lib')
 tableofCars = soup.find('div', attrs = {'class' : 'ooa-1un3d5b er8sc6m2'})
 combis=[]
 
-for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565y0'}):
+for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1ukhrp5 evg565y0'}):
     car = {}
     car['yearOfManufacture'] = row.li.text
-    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y11'}).text
+    car['price'] = row.find('span',attrs ={'class' : 'ooa-1bmnxg7 evg565y13'}).text
     mil = row.findAll('li')[1].text
     car['mileage'] = mil.strip(" km")
     hp = row.findAll('li')[2].text
@@ -167,10 +168,9 @@ for row in tableofCars.findAll('article', attrs = {'class' : 'ooa-1nix3k0 evg565
     car['HP to determine'] = changeToHp(x)
     car['typeOfFuel'] = row.findAll('li')[3].text
     car['name'] = row.find('a', attrs = {'target' : '_self'}).text
-    img = row.find('img', attrs = {'class' : 'evg565y18 ooa-ep0of3'})
+    img = row.find('img', attrs = {'class' : 'evg565y20 ooa-ep0of3'})
     car['img'] = img['src']
     combis.append(car)
-
 
 conn = psycopg2.connect(
    database="cars",
